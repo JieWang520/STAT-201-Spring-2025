@@ -1,8 +1,8 @@
 ---
-title: "Descriptive Statistics And Graphs"
+title: "Desciptive Statistics and Graphs"
 author: "Jie Wang"
-date: "2025-05-02"
-output: html_document
+date: "2025-05-07"
+output: pdf_document
 ---
 
 This file contains sample R code for the lesson "Descriptive Statistics and Graphs".
