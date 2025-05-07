@@ -1,0 +1,159 @@
+---
+title: "Descriptive Statistics And Graphs"
+author: "Jie Wang"
+date: "2025-05-02"
+output: html_document
+---
+
+This file contains sample R code for the lesson "Descriptive Statistics and Graphs".
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Example 1
+
+Let's use a toy example. For more details, please read the lesson notes. 
+
+```{r race0}
+Time = c(44, 37, 40, 46, 44, 30, 40, 34, 34, 37, 
+        36, 42, 39, 36, 37, 37, 42, 34, 37, 31)
+Time
+```
+Let's find the mean and standard deviation of Time. 
+
+```{r race1}
+time.bar = mean(Time)
+time.sd <- sd(Time)
+
+```
+
+The (sample) mean time is `r round(time.bar,3)` with a (sample) standard deviation `r round(time.sd, 3)`. 
+
+If you would like to obtain a set of summary statistics, you may try the following:
+
+```{r race2}
+
+# The five number summary and the mean
+summary(Time)
+
+# Range
+range(Time)
+
+# IQR
+IQR(Time)
+
+# Variance
+var(Time)
+
+```
+Let's get the graphs. 
+
+```{r race3}
+
+# Histogram
+hist(Time, breaks=seq(30,46,2), right = FALSE) 
+# right= is logical; if TRUE, the histogram cells are right-closed (left open) intervals.
+
+# Boxplot
+boxplot(Time, xlab="Time", ylab="Minutes")
+
+```
+## Example 2
+
+Let's see another type of variable. 
+
+```{r food}
+Food = c('Pinapple', 'Pinapple', 'Pasta', 'Pizza', 'Pasta', 'Pasta', 'Pinapple', 'Pizza', 'Pasta', 'Pasta', 'Pinapple', 'Pasta', 'Pizza', 'Pinapple', 'Pasta', 'Pizza', 'Pinapple', 'Pinapple', 'Pinapple', 'Pinapple')
+print(Food)
+```
+
+
+Obtain the frequency (count) or relative frequency of each type of food. 
+
+```{r food1}
+table(Food)
+
+table(Food)/length(Food)
+```
+Making graphs. 
+
+```{r food2}
+
+Freq <- c(7,9,4)
+FoodType <- c("Pasta","Pinapple","Pizza")
+
+# Bar chart. You can add a lot of attributes. 
+barplot(Freq,names.arg=FoodType,xlab="Food",ylab="Frequency",
+        col="blue", main="Bar Chart for Food Type",border="red")
+
+# Pie chart. You can make it very simple. 
+pie(Freq, FoodType)
+
+```
+
+
+## Example 3 
+
+```{r cars}
+data(mtcars)
+mtcars
+
+# Or you can print just a few rows. 
+head(mtcars)
+
+```
+
+Now, let's play the game of finding statistics and making graphs using this set of data.
+
+Can you find the descriptive statistics of the variable mpg?
+
+Can you find the descriptive statistics of cyl, treating cyl as a categorical variable?
+
+Can you make a histogram for mpg? a bar chart for cyl?
+
+Let me show you what I do to answer these questions. 
+
+
+```{r cars1}
+
+# The (sample) mean of mpg
+mpg.bar = mean(mtcars$mpg) # Use the $ sign to reference a variable in a data frame. 
+mpg.bar
+
+# If you don't want to use the $ sign, you can try with() as shown below. 
+# The sample standard deviation of mpg
+mpg.sd = with(mtcars, sd(mpg))
+mpg.sd
+
+# The sample variance can be found by 
+var(mtcars$mpg)
+# or 
+mpg.sd^2
+
+# The quartiles and the extremes can be found individually or together as shown below. 
+quantile(mtcars$mpg)
+```
+
+Thus the mean and standard deviation of mpg are `r round(mpg.bar,3)` and `r round(mpg.sd,3)`. 
+
+```{r cars2}
+
+# The frequencies of cyl values
+table(mtcars$cyl)
+
+# Relative frequencies
+table(mtcars$cyl)/length(mtcars$cyl)
+
+```
+```{r cars3}
+
+# The histogram
+hist(mtcars$mpg)
+
+# The bar chart
+Freq=c(11,7,14)
+cyl_cate=c("4","6","8")
+
+barplot(Freq,names.arg=cyl_cate)
+```
